@@ -13,6 +13,7 @@
     "egg-mysql": "^3.0.0",
     "egg-scripts": "^2.11.0",
     "egg-view-ejs": "^2.0.1",
+    "koa-compress": "^5.1.0",
     "mkdir": "0.0.2",
     "mkdirp": "^1.0.4",
     "moment": "^2.29.1"

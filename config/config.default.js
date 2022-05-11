@@ -5,6 +5,8 @@
 /**
  * @param {Egg.EggAppInfo} appInfo app info
  */
+const path = require('path');
+
 module.exports = appInfo => {
   /**
    * built-in config
@@ -16,7 +18,7 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_1628064890529_9870';
 
   // add your middleware config here
-  config.middleware = [];
+  config.middleware = [ 'compress' ];
 
   // add your user config here
   const userConfig = {
@@ -37,10 +39,10 @@ module.exports = appInfo => {
   };
   config.mysql = {
     client: {
-      host: '1.117.56.86',
-      port: '3306',
+      host: 'sh-cynosdbmysql-grp-69gahe56.sql.tencentcdb.com',
+      port: '21141',
       user: 'root',
-      password: '123456',
+      password: 'Aa123456',
       database: 'ball-book',
     },
     // 是否加载到app上
@@ -51,13 +53,24 @@ module.exports = appInfo => {
   config.jwt = {
     secret: 'ballBook',
   };
+  config.compress = {
+    threshold: 2048,
+  };
   config.multipart = {
     mode: 'file',
   };
   config.cors = {
-    origin: '*',
+    origin: ctx => ctx.get('origin'),
     credentials: true,
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH',
+  };
+  config.static = {
+    prefix: '/public/',
+    dir: path.join('/app'),
+    dynamic: true,
+    preload: false,
+    maxAge: 31536000,
+    buffer: true,
   };
   return {
     ...config,
