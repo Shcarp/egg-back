@@ -1,5 +1,6 @@
 'use strict';
-const baseUrl = 'http://127.0.0.1:7001';
+const baseUrl = process.env.NODE_ENV === 'production' ? 'http://staineds.com:7001' : 'http://localhost:7001';
+console.log(baseUrl);
 const defaultAvatar = `${baseUrl}/public/image/WeChat77d6d2ac093e247c361f0b8a7aeb6c2a.png`;
 const Controller = require('egg').Controller;
 
