@@ -5,7 +5,7 @@
 /**
  * @param {Egg.EggAppInfo} appInfo app info
  */
-const path = require('path');
+// const path = require('path');
 
 module.exports = appInfo => {
   /**
@@ -66,7 +66,7 @@ module.exports = appInfo => {
   };
   config.static = {
     prefix: '/public/',
-    dir: path.join('/app'),
+    // dir: path.join('/app'),
     dynamic: true,
     preload: false,
     maxAge: 31536000,

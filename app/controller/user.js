@@ -41,7 +41,7 @@ class UserController extends Controller {
       return;
     }
     const userInfo = await ctx.service.user.getUserByName(username);
-    if (userInfo) {
+    if (userInfo && userInfo.id) {
       ctx.body = {
         code: 409,
         msg: '账户名已被注册，请重新输入',
@@ -54,6 +54,7 @@ class UserController extends Controller {
       password,
       avatar: defaultAvatar,
       signature: '世界和平。',
+      ctime: +new Date(),
     };
     const result = await ctx.service.user.register(data);
     if (result) {
@@ -146,7 +147,7 @@ class UserController extends Controller {
       // eslint-disable-next-line prefer-const
       user_id = decode.id;
       const userInfo = await ctx.service.user.getUserByName(decode.username);
-      const result = await ctx.service.user.editUserInfo({ ...userInfo, signature, avatar });
+      await ctx.service.user.editUserInfo({ ...userInfo, signature, avatar });
       ctx.body = {
         code: 200,
         msg: '请求成功',
@@ -179,7 +180,7 @@ class UserController extends Controller {
         };
         return;
       }
-      const result = await ctx.service.user.updatePwd(user_id, new_pass);
+      await ctx.service.user.updatePwd(user_id, new_pass);
       ctx.body = {
         code: 200,
         msg: '成功',
